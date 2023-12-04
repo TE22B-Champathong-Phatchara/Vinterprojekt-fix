@@ -17,7 +17,10 @@ bool re;
 int RoomChange; //Variabel för att kolla om spelare är på rätt rum. Your room = 0 Hallway = 1 Living Room = 2 Kitchen = 3 Bathroom = 4
 int book = 1;
 int photo = 0;
-bool obj1 = false;
+bool obj1 = false;//Objektiv för att fixa sängen
+bool obj2 = false;//Objektiv för att äta frukost
+bool obj3 = false;//Objektiv för att vattna blommor
+bool obj5 = false;//Objektiv för att kolla dörren
 
 //----------------------------------------------------------------------------------------------------Code zone------------------------------------------------------------------------------------------------------------------------
 Console.ForegroundColor = ConsoleColor.Red;
@@ -259,12 +262,12 @@ while(re == true)
 
         if ((todo == "go your room" || todo == "go to your room") && RoomChange == 0)
         {
-            System.Console.WriteLine("\nYou're already in your room\n");
+            System.Console.WriteLine("\nYou're already in \u001b[36myour room\u001b[0m.\n");
             continue;
         }
         else if ((todo == "go your room" || todo == "go to your room") && RoomChange != 0)
         {
-            System.Console.WriteLine("\nYou go to your room\n");
+            System.Console.WriteLine("\nYou go to \u001b[36myour room\u001b[0m.\n");
             RoomChange = 0;
             continue;
         }
@@ -281,16 +284,16 @@ while(re == true)
         }
         if (todo == "check bed" && RoomChange == 0 && obj1 == true)
         {
-            System.Console.WriteLine("\nYou already made your bed.");
+            System.Console.WriteLine("\nYou're already made your \u001b[36mbed\u001b[0m.");
             Thread.Sleep(1000);
             System.Console.WriteLine("You don't need to do anything further.\n");
             continue;
         }
         else if (todo == "check bed" && RoomChange == 0)
         {
-            System.Console.WriteLine("\nYou stare at the little mess on your bed.");
+            System.Console.WriteLine("\nYou stare at the little mess on your \u001b[36mbed\u001b[0m.");
             Thread.Sleep(1000);
-            System.Console.WriteLine("You start make your bed...");
+            System.Console.WriteLine("You start make your \u001b[36mbed\u001b[0m...");
             Thread.Sleep(2000);
             System.Console.WriteLine("Done, all neat and tidy now.\n");
             obj1 = true;
@@ -305,7 +308,7 @@ while(re == true)
         }
         else if (todo == "check bookshelf" && RoomChange == 0 && book == 3)
         {
-            System.Console.WriteLine("\nYou sweep a glance at the bookshelf.");
+            System.Console.WriteLine("\nYou sweep a glance at the \u001b[36mbookshelf\u001b[0m.");
             Thread.Sleep(1000);
             System.Console.WriteLine("You try to find a book.");
             Thread.Sleep(3000);
@@ -317,7 +320,7 @@ while(re == true)
         }
         else if (todo == "check bookshelf" && RoomChange == 0)
         {
-            System.Console.WriteLine("\nYou sweep a glance at the bookshelf.");
+            System.Console.WriteLine("\nYou sweep a glance at the \u001b[36mbookshelf\u001b[0m.");
             Thread.Sleep(1000);
             System.Console.WriteLine("You try to find a book.");
             Thread.Sleep(3000);
@@ -329,7 +332,7 @@ while(re == true)
         {
             System.Console.WriteLine("\nYou look at the table.");
             Thread.Sleep(1000);
-            System.Console.WriteLine("Except the alarm, there isn't much on your desk.");
+            System.Console.WriteLine("Except the alarm, there isn't much on your \u001b[36desk\u001b[0m.");
             Thread.Sleep(2000);
             System.Console.WriteLine("Just a lamp and a \u001b[36mphotograph\u001b[0m of someone.\n");
             continue;
@@ -365,16 +368,77 @@ while(re == true)
 
         if ((todo == "go hallway" || todo == "go to hallway") && RoomChange == 1)
         {
-            System.Console.WriteLine("\nYou're already in hallway.\n");
+            System.Console.WriteLine("\nYou're already in \u001b[36mhallway\u001b[0m.\n");
             continue;
         }
         else if ((todo == "go hallway" || todo == "go to hallway") && RoomChange != 1)
         {
-            System.Console.WriteLine("\nYou go to the hallway.\n");
+            System.Console.WriteLine("\nYou go to the \u001b[36mhallway\u001b[0m.\n");
             RoomChange = 1;
             continue;
         }
-        
+        if (todo == "check hallway" && RoomChange == 1)
+        {
+            System.Console.WriteLine("\nYou look at the \u001b[36mhallway\u001b[0m.\n");
+            Thread.Sleep(1000);
+            System.Console.WriteLine("You used to fantasize that this hallway could be long, endless.");
+            Thread.Sleep(2000);
+            System.Console.WriteLine("Until you realize that it's too small to be endless.");
+            Thread.Sleep(1000);
+            System.Console.WriteLine("At the end of the hallway, there is just an \u001b[36mentry door\u001b[0m and wardrobe.\n");
+            Thread.Sleep(2000);
+            System.Console.WriteLine("Wait, why is the wardrobe here in the \u001b[36mhallway\u001b[0m?\n");
+            continue;
+        }
+
+        if (todo == "check entry door" && RoomChange == 1 && obj5 == true)
+        {
+            System.Console.WriteLine("\nYou've already check the \u001b[36mentry door\u001b[0m.\n");
+            continue;
+        }
+        else if (todo == "check entry door" && RoomChange == 1)
+        {
+            System.Console.Write("\nYou check the \u001b[36mentry door\u001b[0m.");
+            Thread.Sleep(1000);
+            System.Console.Write(".");
+            Thread.Sleep(1000);
+            System.Console.WriteLine(".");
+            Thread.Sleep(1000);
+            System.Console.Write("It's locked,");
+            Thread.Sleep(2000);
+            System.Console.WriteLine("as usual.\n");
+            obj5 = true;
+            continue;
+        }
+
+//----------------------------------------------------------------------------------------------------Living room zone------------------------------------------------------------------------------------------------------------------------
+
+        if ((todo == "go living room" || todo == "go to living room") && RoomChange == 2)
+        {
+            System.Console.WriteLine("\nYou're already in \u001b[36mliving room\u001b[0m.\n");
+            continue;
+        }
+        else if ((todo == "go living room" || todo == "go to living room") && RoomChange != 2)
+        {
+            System.Console.WriteLine("\nYou go to \u001b[36mlivning room\u001b[0m.\n");
+            RoomChange = 2;
+            continue;
+        }
+        if (todo == "check living room" && RoomChange == 2)
+        {
+            System.Console.WriteLine("\nYou look around the \u001b[36mliving room\u001b[0m.\n");
+            Thread.Sleep(1000);
+            System.Console.WriteLine("This room is slightly larger than \u001b[36myour room\u001b[0m.");
+            Thread.Sleep(1000);
+            System.Console.WriteLine("There is a medium-sized flat-screen \u001b[36mTV\u001b[0m and a soft \u001b[36msofa\u001b[0m to sit and watch \u001b[36mTV\u001b[0m on.");
+            Thread.Sleep(2000);
+            System.Console.WriteLine("By the window, there is a small \u001b[36mflower\u001b[0m bed with different types of \u001b[36mflower\u001b[0ms mixed in it.");
+            Thread.Sleep(2000);
+            System.Console.WriteLine("Light coming through the window makes the room look warm.\n");
+            continue;
+        }
+
+
         
         
     
