@@ -8,7 +8,7 @@ using System.Security.Cryptography.X509Certificates;
 Console.OutputEncoding = System.Text.Encoding.UTF8;
 
 
-Console.Title = "The name belongs to her";
+Console.Title = "As usual";
 //----------------------------------------------------------------------------------------------------Variable zone------------------------------------------------------------------------------------------------------------------------
 
 string yn;//stirng för ja eller nej
@@ -30,6 +30,8 @@ bool food = false;
 bool CheckMicro = false;
 bool foodWarm = false;
 bool sink = false;
+bool diary = false;
+int attemp = 0;
 //----------------------------------------------------------------------------------------------------Code zone------------------------------------------------------------------------------------------------------------------------
 Console.ForegroundColor = ConsoleColor.Red;
 Console.WriteLine("_________________________________________________________\n");
@@ -43,12 +45,13 @@ re = true;
 while(re == true)
 {
     
-    List<string> names = new List<string>() {"Martin", "Lena","Nicholas", "Christian"};
+    List<string> names = new List<string>() {"Lily", "Zack", "Nix"};
     names.Add("Micke");
     names.Add("Yoko");
-    names.Add("Lucas");
-    names.Add("Sebastian");
-    names.Add("Steve");
+    if (attemp > 0)
+    {
+        names.Add("Christ");
+    }
 
     Random generator = new Random(); 
 
@@ -118,27 +121,13 @@ while(re == true)
         }
         else
         {
-            processing();
-            if (ContainsBadWord(py))
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                System.Console.WriteLine("Prossesing Failed!");
-                Thread.Sleep(1000);
-                System.Console.WriteLine("The name contains some sensitive words. Please write your name again.\n");
-
-                Console.ResetColor();
-                continue;
-            }
-            else
-            {
-                Console.ForegroundColor = ConsoleColor.Green;
-                System.Console.WriteLine("Processing Complete.\n");
-                Console.ResetColor();
-                Thread.Sleep(3000);
-                on2 = true;
-            }
+            Console.ForegroundColor = ConsoleColor.Green;
+            System.Console.WriteLine("Processing Complete.\n");
+            Console.ResetColor();
+            Thread.Sleep(3000);
+            on2 = true;
         }
-        
+    
 
         while(on2 == true)
         {
@@ -215,6 +204,10 @@ while(re == true)
             System.Console.WriteLine("What are you going to do with it?\n");
             continue;
         }
+        else if (alarm == "slam the alarm")
+        {
+            System.Console.WriteLine("You slammed the alarm with your agressiveness.");
+        }
         else
         {
             System.Console.WriteLine("You are annoyed by the alarm sound.");
@@ -222,6 +215,7 @@ while(re == true)
             System.Console.WriteLine("Try to come up what you can do.\n");
             continue;
         }
+
     }
     System.Console.WriteLine("You forced your upper body to go up into a sitting position");
     Thread.Sleep(2000);
@@ -262,7 +256,23 @@ while(re == true)
     while (true)
     {
         string todo = Console.ReadLine().ToLower();
-        todoCommand(todo);
+
+
+        if (todo == "task" || todo == "t")
+        {
+            task();
+            continue;
+        }
+        if (todo == "go")
+        {
+            Console.WriteLine("You are still unsure where to go.");
+            continue;
+        }
+        if (todo == "check ")
+        {
+            Console.WriteLine("You checked the air, but there was nothing unusual.");
+            continue;
+        }
 
 //----------------------------------------------------------------------------------------------------Your room zone------------------------------------------------------------------------------------------------------------------------
 
@@ -290,7 +300,7 @@ while(re == true)
         }
         if (todo == "check your room" && RoomChange == 0)
         {
-            System.Console.WriteLine("\nYou look around \u001b[36myour room\u001b[0\n");
+            System.Console.WriteLine("\nYou look around \u001b[36myour room\u001b[0m\n");
             Thread.Sleep(1000);
             System.Console.WriteLine("Because of the size of the apartment you live in, your room is not very wide.");
             Thread.Sleep(1000);
@@ -310,14 +320,13 @@ while(re == true)
         {
             System.Console.WriteLine("\nYou stare at the little mess on your \u001b[36mbed\u001b[0m.");
             Thread.Sleep(1000);
-            System.Console.WriteLine("You start make your \u001b[36mbed\u001b[0m");
+            System.Console.Write("You start make your \u001b[36mbed\u001b[0m");
             loading();
             Thread.Sleep(2000);
             System.Console.WriteLine("Done, all neat and tidy now.\n");
             obj1 = true;
             continue;
         }
-
         if (todo == "check bookshelf" && RoomChange == 0 && sink == false)
         {
             System.Console.WriteLine("\nYou're not fully awake for checking the \u001b[36mbookshelf\u001b[0m; you might need to wash your face first.\n");
@@ -331,7 +340,7 @@ while(re == true)
             System.Console.WriteLine("You don't feel like trying to find a book anymore.\n");
             continue;
         }
-        else if (todo == "check bookshelf" && RoomChange == 0 && book == 3)
+        else if (todo == "check bookshelf" && RoomChange == 0 && book == 3 && Ranname != "Lily")
         {
             System.Console.WriteLine("\nYou sweep a glance at the \u001b[36mbookshelf\u001b[0m.");
             Thread.Sleep(1000);
@@ -341,6 +350,7 @@ while(re == true)
             Thread.Sleep(1000);
             System.Console.WriteLine("You've found someone's \u001b[36mdiary\u001b[0m.\n");
             book++;
+            diary = true;
             continue;
         }
         else if (todo == "check bookshelf" && RoomChange == 0)
@@ -401,6 +411,29 @@ while(re == true)
             photo = true;
             continue;
         }
+        if (todo == "check diary" && diary == true && attemp > 0)
+        {
+            Console.WriteLine("\nYou've reached the secret end of this demo after " + attemp + " time(s)." );
+            Thread.Sleep(2000);
+            Console.WriteLine("As the narrator in this game, I, " + Ranname + ", want to express my gratitude for playing.\n");
+            Thread.Sleep(3000);
+            break;
+        }
+
+        if (todo == "check diary" && diary == true && attemp == 0)
+        {
+            Console.WriteLine("\nYou've reached the secret end of this demo on your first playthrough.");
+            Thread.Sleep(2000);
+            Console.WriteLine("I hope you played fair without cheating.");
+            Thread.Sleep(1000);
+            Console.WriteLine("As a reward, this \u001b[36mdiary\u001b[0m will guide you through your journey.");
+            Thread.Sleep(1000);
+            Console.WriteLine("Remember, there's something special about the name.");
+            Thread.Sleep(1000);
+            Console.WriteLine("As the narrator in this game, I, " + Ranname + ", want to express my gratitude for playing.\n");
+            Thread.Sleep(3000);
+            break;
+        }
 //----------------------------------------------------------------------------------------------------hallway zone------------------------------------------------------------------------------------------------------------------------
 
         if ((todo == "go hallway" || todo == "go to hallway") && RoomChange == 1)
@@ -432,9 +465,14 @@ while(re == true)
             System.Console.WriteLine("Wait, why is the wardrobe here in the \u001b[36mhallway\u001b[0m?\n");
             continue;
         }
-        if (todo == "check entry door" && RoomChange == 1 && sink == false)
+        if (todo == "check entry door" && RoomChange == 1 && sink == false && attemp == 0)
         {
             System.Console.WriteLine("\nYou're not fully...wait, how did you...!?\n");
+            continue;
+        }
+        if (todo == "check entry door" && RoomChange == 1 && sink == false && attemp > 0)
+        {
+            System.Console.WriteLine("\nYou're not fully awake to check the \u001b[36mentry door\u001b[0. Your knowlegde from previous playthrough huh?\n");
             continue;
         }
 
@@ -711,7 +749,7 @@ while(re == true)
             Thread.Sleep(2000);
             System.Console.Write("You turned off the fuacet and look again at the mirror.");
             Thread.Sleep(2000);
-            System.Console.WriteLine("Your face looks now better.\n");
+            System.Console.WriteLine(" Your face looks now better.\n");
             sink = true;
             continue;
         }
@@ -752,9 +790,16 @@ while(re == true)
             System.Console.WriteLine("You decide to eat something first.\n");
             continue;
         }
-//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-        if (obj1 && obj2 && obj3 && obj4 && obj5)
+//--------------------------------------------------------------------------------------------Ending(s) zone------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        if (todo == "yakumo")
+        {
+            obj1 = true;
+            obj2 = true;
+            obj3 = true;
+            obj4 = true;
+            obj5 = true;
+        }
+        if (obj1 && obj2 && obj3 && obj4 && obj5 && Ranname != "Christ")
         {
             System.Console.WriteLine("\nNow, you've completed your task for today.\n");
             Thread.Sleep(2000);
@@ -770,7 +815,63 @@ while(re == true)
             Thread.Sleep(2000);
             System.Console.WriteLine(" Just same \u001b[31mas usual\u001b[0m.");
             Thread.Sleep(3000);
-            break;
+            System.Console.WriteLine("However, I can give you another chance unlike Christ.");
+            Thread.Sleep(2000);
+            System.Console.WriteLine("Would you like to accept it? (Y/N)");
+            
+            while(true)
+            {
+                yn = Console.ReadLine().ToLower();
+
+                if(yn == "yes" || yn == "y")
+                {
+                    System.Console.WriteLine("Alright, if luck is on your side, we might meet again.");
+                    re = true;
+                    break;
+                }
+                else if(yn == "no" || yn == "n")
+                {
+                    System.Console.WriteLine("I respect your decision. Feel free to return whenever you're ready.");
+                    Thread.Sleep(2000);
+                    System.Console.WriteLine("Thanks for playing.");
+                    break;
+                }
+                else
+                {
+                    System.Console.WriteLine("Please answer the question.");
+                    continue;
+                }
+            }
+
+        }
+        else if (obj1 && obj2 && obj3 && obj4 && obj5 && Ranname == "Christ")
+        {
+            System.Console.WriteLine("\nNow, you've completed your task for today.\n");
+            Thread.Sleep(2000);
+            System.Console.WriteLine("You decide to go back to your room.");
+            Thread.Sleep(2000);
+            System.Console.WriteLine("You picked up the blanket that you folded not too long ago.");
+            Thread.Sleep(2000);
+            System.Console.Write("You lay down on the bed. ");
+            Thread.Sleep(1000);
+            System.Console.WriteLine("Close your eyes.");
+            Thread.Sleep(3000);
+            System.Console.Write("Everything you do.");
+            Thread.Sleep(2000);
+            System.Console.WriteLine(" Just same \u001b[31mas usual\u001b[0m.");
+            Thread.Sleep(3000);
+            Console.ForegroundColor = ConsoleColor.Red;
+            System.Console.WriteLine("Have you even try to change anything?");
+            Thread.Sleep(1000);
+            System.Console.WriteLine("I know this is not first time, huh?");
+            Thread.Sleep(1000);
+            System.Console.WriteLine("You've already used your chance enough.");
+            Thread.Sleep(2000);
+            System.Console.WriteLine("Not everybody would have many chances like you.");
+            Thread.Sleep(3000);
+            continue;
+
+            
         }
     
         
@@ -843,21 +944,6 @@ while(re == true)
 
 
 
-
-static bool ContainsBadWord(string name)
-{
-    string[] badWords = { "fuck", "slut", "pussy","dick","gay","cum","cunt","bitch" };
-    foreach (var word in badWords)
-    {
-        if (name.ToLower().Contains(word.ToLower()))
-        {
-            return true;
-        }
-    }
-
-    return false;
-}
-
 static void processing()
 {
     Console.ForegroundColor = ConsoleColor.Green;
@@ -880,29 +966,8 @@ static void loading()
     Thread.Sleep(2000);
     System.Console.WriteLine(".");
 }
-void todoCommand(string doit)
-{
-    switch (doit)
-    {
-            case "task":
-            case "t":
-                task();
-                break;
-
-            case "go":
-                Console.WriteLine("You are still unsure where to go.");
-                break;
-
-            case "check":
-                Console.WriteLine("You checked the air, but there was nothing unusual.");
-                break;
-            
-    }
-}
-
 void task()
 {
-    // System.Console.WriteLine("Make the bed.\nEat something.\nWater the flowers.\nShower.\nCheck the entry door.\n");
 
     System.Console.WriteLine("Things you need to do:\n");
     Thread.Sleep(1000);
